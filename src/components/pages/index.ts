@@ -1,0 +1,6 @@
+export {Profile} from './profile/profile'
+export {Login} from './login/login'
+export {Registration} from './registration/registration'
+export {Tasks} from './tasks/tasks'
+export {AddTask} from './add-task/add-task'
+export {NotFoundPage} from './not-found-page/not-found-page'
