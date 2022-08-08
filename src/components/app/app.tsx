@@ -3,14 +3,15 @@ import {Route, Routes } from "react-router-dom";
 
 import {Profile, Login, Registration, Tasks, AddTask, NotFoundPage} from "components/pages";
 
-import './app.module.scss';
+import styles from './app.module.scss';
 
 
 function App() {
   return (
-    <div>
+    <div className={styles.background}>
+        <div className={styles.container}>
         <Routes>
-            <Route path={'/'} element={<Profile/>}/>
+            <Route path={'/'} element={<Tasks/>}/>
             <Route path={'/profile'} element={<Profile/>}/>
             <Route path={'/login'} element={<Login/>}/>
             <Route path={'/registration'} element={<Registration/>}/>
@@ -18,6 +19,7 @@ function App() {
             <Route path={'/add/task'} element={<AddTask/>}/>
             <Route path={'*'} element={<NotFoundPage/>}/>
         </Routes>
+        </div>
     </div>
   );
 }
