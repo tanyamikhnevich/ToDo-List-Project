@@ -48,7 +48,6 @@ export const store: StoreType = [
 export const Tasks = () => {
   const [visible, setVisible] = useState(false);
 
-
   const [searchParams] = useSearchParams();
   const tagQuery =
     searchParams.get(
@@ -63,12 +62,12 @@ export const Tasks = () => {
   // const login = tagQuery==="login";
 
   const toggleVisibleTask = () => {
-    setVisible(true)
-  }
+    setVisible(true);
+  };
 
   const toggleVisibleProfile = () => {
-    setVisible(false)
-  }
+    setVisible(false);
+  };
 
   return (
     <section className={styles.container}>
@@ -80,24 +79,27 @@ export const Tasks = () => {
         >
           Таски
         </NavLink>
-        <NavLink className={classNames(styles.button)} to={"/tasks"}
-        onClick={toggleVisibleProfile}>
+        <NavLink
+          className={classNames(styles.button)}
+          to={"/profile"}
+          onClick={toggleVisibleProfile}
+        >
           Профиль
         </NavLink>
         <NavLink className={classNames(styles.button)} to={"/login"}>
           Выход
         </NavLink>
       </div>
-      {visible?
-      <div>
-        <Filter />
-        {store.map((name) => (
-          <NameTask key={name.id} {...name} />
-        ))}
-      </div>
-      :
-      <div>Profile</div>
-      }
+      {visible ? (
+        <div>
+          <Filter />
+          {store.map((name) => (
+            <NameTask key={name.id} {...name} />
+          ))}
+        </div>
+      ) : (
+        <div>Profile</div>
+      )}
     </section>
   );
 };

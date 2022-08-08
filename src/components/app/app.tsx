@@ -1,25 +1,38 @@
-import React from 'react';
-import {Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-import {Profile, Login, Registration, Tasks, AddTask, NotFoundPage} from "components/pages";
+import {
+  Profile,
+  Login,
+  Registration,
+  Tasks,
+  AddTask,
+  NotFoundPage,
+} from "components/pages";
 
-import styles from './app.module.scss';
+// Все стили в styles на весь проект
+import "./styles/index.scss";
 
+import styles from "./app.module.scss";
+import { Wrapper } from "../widgets/default-navbar/wrapper";
+
+// Убрать {} там где внутри текст
+// Убрать index.css, перенести reset styles
 
 function App() {
   return (
     <div className={styles.background}>
-        <div className={styles.container}>
+      <div className={styles.container}>
         <Routes>
-            <Route path={'/'} element={<Tasks/>}/>
-            <Route path={'/profile'} element={<Profile/>}/>
-            <Route path={'/login'} element={<Login/>}/>
-            <Route path={'/registration'} element={<Registration/>}/>
-            <Route path={'/tasks'} element={<Tasks/>}/>
-            <Route path={'/add/task'} element={<AddTask/>}/>
-            <Route path={'*'} element={<NotFoundPage/>}/>
+          <Route path={"/"} element={<Tasks />} />
+          <Route path={"/profile"} element={<Profile />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/registration"} element={<Registration />} />
+          <Route path={"/tasks"} element={<Tasks />} />
+          <Route path={"/add/task"} element={<AddTask />} />
+          <Route path={"*"} element={<NotFoundPage />} />
         </Routes>
-        </div>
+      </div>
     </div>
   );
 }
