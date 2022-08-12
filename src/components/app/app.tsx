@@ -14,23 +14,20 @@ import {
 import "./styles/index.scss";
 
 import styles from "./app.module.scss";
-import { Wrapper } from "../widgets/default-navbar/wrapper";
-
-// Убрать {} там где внутри текст
-// Убрать index.css, перенести reset styles
+// import { Wrapper } from "../widgets/default-navbar/wrapper-nav";
 
 function App() {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
         <Routes>
-          <Route path={"/"} element={<Tasks />} />
-          <Route path={"/profile"} element={<Profile />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/registration"} element={<Registration />} />
-          <Route path={"/tasks"} element={<Tasks />} />
-          <Route path={"/add/task"} element={<AddTask />} />
-          <Route path={"*"} element={<NotFoundPage />} />
+          <Route path="/" element={<Tasks />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/add/task" element={<AddTask />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </div>

@@ -1,1 +1,1 @@
-export {} from ''
+export {WrapperNav} from './../../widgets/default-navbar/wrapper-nav'
