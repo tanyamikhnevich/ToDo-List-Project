@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container:before {
+  position: absolute;
+  content: '';
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.popup {
+  position: absolute;
+  background: white;
+  width: 528px;
+  height: 363px;
+  border-radius: 16px;
+  padding: 20px 20px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+
+}
+
+.close{
+  position: absolute;
+  top: 20px;
+  left: 515px;
+  border:none;
+  background: white;
+
+}

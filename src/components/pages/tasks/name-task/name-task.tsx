@@ -1,16 +1,11 @@
-import points from "./../../../assets/images/three-points.svg";
+import { ReactComponent as Points } from "./../../../assets/images/three-points.svg";
 
-import styles from "./name-task.module.scss";
 import { removeTodo, toggleTodoComplete } from "../../../store/toDoSlice";
 import React, { Fragment } from "react";
 import classNames from "classnames";
-import {useAppDispatch, useAppSelector} from "./hooks";
+import { useAppDispatch, useAppSelector } from "./hooks";
 
-// interface Props {
-//   id: number;
-//   text: string;
-//   completed: any;
-// }
+import styles from "./name-task.module.scss";
 
 export const NameTask: React.FC = () => {
   const todos = useAppSelector((state) => state.todos.todos);
@@ -38,19 +33,24 @@ export const NameTask: React.FC = () => {
               >
                 {todo.text}
               </h2>
+              <p className={styles.description}>
+                Description of task Хочу рассказать вам про свой переезд. Нашла
+                в интернете компанию в Эстонии, которая тысяч за 10–15
+                «оформляют» вид на жительство...
+              </p>
               <div className={styles.buttonContainer}>
                 <button className={styles.buttonTag}>tag</button>
                 <button className={styles.buttonTag}>tag</button>
                 <button className={styles.buttonTag}>tag</button>
               </div>
             </div>
-            <div className={styles.next}>
-              <img src={points} alt={"..."} />
-            </div>
+            <button
+              className={styles.next}
+            >
+              <Points />
+            </button>
           </div>
-          <button onClick={() => dispatch(removeTodo(todo.id))}>
-            DELETE
-          </button>
+          <button onClick={() => dispatch(removeTodo(todo.id))}>DELETE</button>
         </Fragment>
       ))}
     </div>

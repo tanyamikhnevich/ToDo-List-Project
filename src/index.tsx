@@ -4,10 +4,9 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-
 import App from "./components/app/app";
-import store from "./components/store/index"
-
+import store from "./components/store/index";
+import { PopupProvider } from "./components/features/popup";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +15,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <PopupProvider>
+          <App />
+        </PopupProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,13 +1,12 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import {
   NavLink,
   useLocation,
-  useParams,
-  useSearchParams,
 } from "react-router-dom";
 import classNames from "classnames";
 
 import styles from "./wrapper-nav.module.scss";
+import {usePopup} from "../../features/popup";
 
 interface Props {
   children: ReactNode;
@@ -15,6 +14,7 @@ interface Props {
 
 export const WrapperNav = ({ children }: Props) => {
   const getQuery = useLocation();
+  const { openPopup } = usePopup();
 
   return (
     <nav className={styles.nav}>
@@ -26,7 +26,7 @@ export const WrapperNav = ({ children }: Props) => {
           )}
           to={"/tasks"}
         >
-          Таски
+          Tasks
         </NavLink>
         <NavLink
           className={classNames(
@@ -35,13 +35,17 @@ export const WrapperNav = ({ children }: Props) => {
           )}
           to={"/profile"}
         >
-          Профиль
+          Profile
         </NavLink>
-        <NavLink className={classNames(styles.button)} to={"/login"}>
-          Выход
-        </NavLink>
+
+       <button className={classNames(styles.button, styles.buttonAdd)} onClick={() => openPopup(<div>pupa</div>)}>Add Task</button>
+
+        {/*<NavLink className={classNames(styles.button)} to={"/login"}>*/}
+        {/*  Log Out*/}
+        {/*</NavLink>*/}
+
       </div>
-      <main>{children}</main>
+      <main className={styles.childrenSection}>{children}</main>
     </nav>
   );
 };
