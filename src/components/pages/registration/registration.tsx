@@ -1,5 +1,8 @@
+import {AddTaskForm} from "../tasks/name-task/form-add-task";
+
 export const Registration = () => {
     return (
-        <div>Register Page</div>
+        <div>registration
+        </div>
     )
 }

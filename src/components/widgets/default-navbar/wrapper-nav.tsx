@@ -6,6 +6,7 @@ import { ReactComponent as Plus } from "./../../assets/images/plus.svg";
 
 import styles from "./wrapper-nav.module.scss";
 import { usePopup } from "../../features/popup";
+import {AddTaskForm} from "../../pages/tasks/name-task/form-add-task";
 
 interface Props {
   children: ReactNode;
@@ -39,7 +40,7 @@ export const WrapperNav = ({ children }: Props) => {
 
         <button
           className={classNames(styles.button, styles.buttonAdd)}
-          onClick={() => openPopup(<div>pupa</div>)}
+          onClick={() => openPopup(<AddTaskForm/>)}
         >
           Add Task
         </button>

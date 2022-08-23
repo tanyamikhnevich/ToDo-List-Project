@@ -1,0 +1,98 @@
+.container {
+ background: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.taskName {
+  background: #FFFFFF;
+  border: 1px solid #9BACB5;
+  border-radius: 6px;
+  padding: 12px 16px 10px 16px;
+  margin-bottom: 8px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #565656;
+  width: 80%;
+}
+
+.description {
+  background: #FFFFFF;
+  border: 1px solid #9BACB5;
+  border-radius: 6px;
+  padding: 12px 16px 23px 16px;
+  margin-bottom: 8px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #565656;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tagContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 140%;
+  margin-bottom: 8px;
+}
+
+.tagName {
+  background: #FFFFFF;
+  border: 1px solid #9BACB5;
+  border-radius: 6px;
+  padding: 12px 16px 10px 16px;
+  margin-right: 4px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #565656;
+  width: 75%;
+}
+
+.buttonAdd {
+  background: #000000;
+  border-radius: 8px;
+  color: white;
+  width: 20%;
+  padding: 11px 34px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.saveContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 100px;
+}
+
+.buttonSave {
+  background: #000000;
+  border-radius: 8px;
+  color: white;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  padding: 8px 16px;
+}
+
+.buttonCancel {
+  background: #E5E9EB;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: #565656;
+  padding: 8px 16px;
+  margin-right: 8px;
+}
