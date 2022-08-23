@@ -1,28 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface PayloadI {
+export interface PayloadI {
   id: string;
   text: string;
   completed: boolean;
 }
+
 interface ToDoStateI {
   todos: PayloadI[];
 }
 
 const initialState: ToDoStateI = {
   todos: [],
-}
-
-// const addTodo: CaseReducer<State, PayloadAction<PayloadI>> = (
-//   state,
-//   action
-// ) => {
-//   state.todos.push({
-//     id: new Date().toISOString(),
-//     text: action.payload.text,
-//     completed: false,
-//   });
-// };
+};
 
 const toDoSlice = createSlice({
   name: "todos",

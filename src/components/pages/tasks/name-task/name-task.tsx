@@ -1,15 +1,17 @@
 import { ReactComponent as Points } from "./../../../assets/images/three-points.svg";
 
 import { removeTodo, toggleTodoComplete } from "../../../store/toDoSlice";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "./hooks";
 
 import styles from "./name-task.module.scss";
+import { ButtonSelect } from "./button-select";
 
 export const NameTask: React.FC = () => {
   const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
+
   return (
     <div>
       {todos.map((todo) => (
@@ -44,13 +46,8 @@ export const NameTask: React.FC = () => {
                 <button className={styles.buttonTag}>tag</button>
               </div>
             </div>
-            <button
-              className={styles.next}
-            >
-              <Points />
-            </button>
+            <ButtonSelect todo={todo} />
           </div>
-          <button onClick={() => dispatch(removeTodo(todo.id))}>DELETE</button>
         </Fragment>
       ))}
     </div>

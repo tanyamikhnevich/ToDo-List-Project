@@ -1,12 +1,11 @@
 import React, { ReactNode } from "react";
-import {
-  NavLink,
-  useLocation,
-} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
+import { ReactComponent as Plus } from "./../../assets/images/plus.svg";
+
 import styles from "./wrapper-nav.module.scss";
-import {usePopup} from "../../features/popup";
+import { usePopup } from "../../features/popup";
 
 interface Props {
   children: ReactNode;
@@ -38,12 +37,17 @@ export const WrapperNav = ({ children }: Props) => {
           Profile
         </NavLink>
 
-       <button className={classNames(styles.button, styles.buttonAdd)} onClick={() => openPopup(<div>pupa</div>)}>Add Task</button>
+        <button
+          className={classNames(styles.button, styles.buttonAdd)}
+          onClick={() => openPopup(<div>pupa</div>)}
+        >
+          Add Task
+        </button>
+        <div className={styles.plus}><Plus/></div>
 
         {/*<NavLink className={classNames(styles.button)} to={"/login"}>*/}
         {/*  Log Out*/}
         {/*</NavLink>*/}
-
       </div>
       <main className={styles.childrenSection}>{children}</main>
     </nav>

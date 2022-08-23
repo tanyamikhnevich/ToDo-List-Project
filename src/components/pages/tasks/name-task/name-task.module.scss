@@ -7,6 +7,7 @@
   padding: 20px 24px;
   margin-bottom: 8px;
   border: 1px solid #C4CDD2;
+  position: relative;
 }
 
 .checkboxContainer {
@@ -72,6 +73,28 @@
 .next {
   border: none;
   background: white;
-  cursor: pointer;
   padding-bottom: 100px;
+}
+
+.pointsContainer {
+  position: absolute;
+  top: 50px;
+  right: -50px;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 0 12px rgba(44, 80, 97, 0.2);
+  border-radius: 4px;
+
+}
+
+.buttonEdit {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: #565656;
+  text-align: left;
+  padding: 8px 16px;
+  border: none;
+  background: white;
 }
