@@ -36,7 +36,11 @@ export const ButtonSelect = ({ todo }: PropsI) => {
             Delete Task
           </button>
           <button
-            onClick={() => openPopup(<AddTaskForm name={todo.name} description={todo.description}/>)}
+            onClick={() =>
+              openPopup(
+                <AddTaskForm name={todo.name} description={todo.description} />
+              )
+            }
             className={styles.buttonEdit}
           >
             Edit Task

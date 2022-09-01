@@ -4,17 +4,24 @@ import { useState } from "react";
 import * as Yup from "yup";
 
 import { useAppDispatch, useAppSelector } from "../hooks";
-import {addTodo, addTag as addTagSlice, removeTag} from "../../../../store/toDoSlice";
+import {
+  addTodo,
+  addTag as addTagSlice,
+  removeTag,
+} from "../../../../store/toDoSlice";
 import { usePopup } from "components/features/popup";
-import { ReactComponent as Minus } from "./../../../../assets/images/minus.svg"
+import { ReactComponent as Minus } from "./../../../../assets/images/minus.svg";
 
 import styles from "./form-add-task.module.scss";
+
 // TODO исправить везде импорты
 
 interface Values {
   name: string;
   description: string;
 }
+
+// TODO add disabled state for addButton
 
 const DisplayingErrorMessages = Yup.object().shape({
   name: Yup.string()
@@ -24,9 +31,10 @@ const DisplayingErrorMessages = Yup.object().shape({
   description: Yup.string().max(50, "Too Long!"),
 });
 
-export const AddTaskForm = ({name, description}: Values) => {
+export const AddTaskForm = ({ name, description }: Values) => {
   const { closePopup } = usePopup();
   const [tagName, setTagName] = useState("");
+
   const tags = useAppSelector((state) => state.todos.interimTodo.tags);
   const dispatch = useAppDispatch();
 
@@ -34,14 +42,20 @@ export const AddTaskForm = ({name, description}: Values) => {
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
   ) => {
-    dispatch(addTodo({ name: values.name, description: values.description, tags: tags}));
+    dispatch(
+      addTodo({
+        name: values.name,
+        description: values.description,
+        tags,
+      })
+    );
     setSubmitting(false);
     closePopup();
   };
 
   const addTag = () => {
     dispatch(addTagSlice({ tag: tagName }));
-    setTagName('');
+    setTagName("");
   };
 
   return (
@@ -56,46 +70,60 @@ export const AddTaskForm = ({name, description}: Values) => {
       >
         {({ errors, touched }) => (
           <Form className={styles.form}>
-            <Field
-              className={styles.taskName}
-              id="name"
-              name="name"
-              placeholder="Name of task"
-            />
-            {touched.name && errors.name && <div>{errors.name}</div>}
-
-            <Field
-              className={styles.description}
-              id="description"
-              name="description"
-              placeholder="Description"
-            />
-            {touched.description && errors.description && (
-              <div>{errors.description}</div>
-            )}
-
-            <div className={styles.tagContainer}>
-              <input
-                className={styles.tagName}
-                placeholder="Name of tag"
-                onChange={(e) => {
-                  setTagName(e.currentTarget.value);
-                }}
-                value={tagName}
+            <div>
+              <Field
+                className={styles.taskName}
+                id="name"
+                name="name"
+                placeholder="Name of task"
               />
-              <button className={styles.buttonAdd} onClick={addTag} type="button">
-                Add
-              </button>
-            </div>
-            <div className={styles.buttonTagContainer}>
-              {tags.map((tag: string) => (
-                <button onDoubleClick={() => dispatch(removeTag(tag))} key={tag} className={styles.buttonTag} type="button">
-                  <span className={styles.minus}><Minus/></span>{tag}
+              {touched.name && errors.name && <div>{errors.name}</div>}
+              <Field
+                className={styles.description}
+                id="description"
+                name="description"
+                placeholder="Description"
+              />
+              {touched.description && errors.description && (
+                <div>{errors.description}</div>
+              )}
+              <div className={styles.tagContainer}>
+                <input
+                  className={styles.tagName}
+                  placeholder="Name of tag"
+                  onChange={(e) => {
+                    setTagName(e.currentTarget.value);
+                  }}
+                  value={tagName}
+                />
+                <button
+                  className={styles.buttonAdd}
+                  onClick={addTag}
+                  type="button"
+                >
+                  Add
                 </button>
-              ))}
+              </div>
+              <div className={styles.buttonTagContainer}>
+                {tags.map((tag: string) => (
+                  <button
+                    onClick={() => dispatch(removeTag(tag))}
+                    key={tag}
+                    className={styles.buttonTag}
+                    type="button"
+                  >
+                    <span className={styles.minus}>
+                      <Minus />
+                    </span>
+                    {tag}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className={styles.saveContainer}>
-              <button className={styles.buttonCancel} type="button">Cancel</button>
+              <button className={styles.buttonCancel} type="button">
+                Cancel
+              </button>
               <button className={styles.buttonSave} type="submit">
                 Save
               </button>
@@ -105,5 +133,4 @@ export const AddTaskForm = ({name, description}: Values) => {
       </Formik>
     </div>
   );
-
 };

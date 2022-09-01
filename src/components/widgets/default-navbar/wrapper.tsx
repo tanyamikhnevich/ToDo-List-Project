@@ -7,13 +7,16 @@ import { usePopup } from "../../features/popup";
 import { AddTaskForm } from "../../pages/tasks/name-task/form-add-task/form-add-task";
 
 import styles from "./wrapper-nav.module.scss";
-import {OpenTask} from "../../pages/tasks/name-task/open-task/open-task";
+import { OpenTask } from "../../pages/tasks/name-task/open-task/open-task";
 
 interface Props {
   children: ReactNode;
 }
 
-export const WrapperNav = ({ children }: Props) => {
+// TODO вынести NavLink в объект и сделать map
+// TODO childrenSection => main
+
+export const Wrapper = ({ children }: Props) => {
   const getQuery = useLocation();
   const { openPopup } = usePopup();
 
@@ -38,17 +41,16 @@ export const WrapperNav = ({ children }: Props) => {
         >
           Profile
         </NavLink>
-
         <button
           className={classNames(styles.button, styles.buttonAdd)}
-          onClick={() => openPopup(<AddTaskForm name={''} description={''}/>)}
+          onClick={() => openPopup(<AddTaskForm name="" description={""} />)}
           //onClick={() => openPopup(<OpenTask />)}
         >
           Add Task
+          <div className={styles.plus}>
+            <Plus />
+          </div>
         </button>
-        <div className={styles.plus}>
-          <Plus />
-        </div>
       </div>
       <main className={styles.childrenSection}>{children}</main>
     </nav>

@@ -26,7 +26,9 @@ export const PopupProvider = ({ children }: Props) => {
       <div className={classNames(component && styles.container)}>
         {component && (
           <div className={styles.popup}>
-            <button className={styles.close} onClick={closePopup}><CloseButton/></button>
+            <button className={styles.close} onClick={closePopup}>
+              <CloseButton />
+            </button>
             {component}
           </div>
         )}

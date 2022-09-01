@@ -10,7 +10,6 @@ import {
 } from "components/pages";
 
 import "./styles/index.scss";
-
 import styles from "./app.module.scss";
 
 function App() {
