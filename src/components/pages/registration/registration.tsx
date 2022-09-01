@@ -1,4 +1,4 @@
-import {AddTaskForm} from "../tasks/name-task/form-add-task";
+import {AddTaskForm} from "../tasks/name-task/form-add-task/form-add-task";
 
 export const Registration = () => {
     return (

@@ -3,10 +3,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
 import { ReactComponent as Plus } from "./../../assets/images/plus.svg";
+import { usePopup } from "../../features/popup";
+import { AddTaskForm } from "../../pages/tasks/name-task/form-add-task/form-add-task";
 
 import styles from "./wrapper-nav.module.scss";
-import { usePopup } from "../../features/popup";
-import {AddTaskForm} from "../../pages/tasks/name-task/form-add-task";
+import {OpenTask} from "../../pages/tasks/name-task/open-task/open-task";
 
 interface Props {
   children: ReactNode;
@@ -40,15 +41,14 @@ export const WrapperNav = ({ children }: Props) => {
 
         <button
           className={classNames(styles.button, styles.buttonAdd)}
-          onClick={() => openPopup(<AddTaskForm/>)}
+          onClick={() => openPopup(<AddTaskForm name={''} description={''}/>)}
+          //onClick={() => openPopup(<OpenTask />)}
         >
           Add Task
         </button>
-        <div className={styles.plus}><Plus/></div>
-
-        {/*<NavLink className={classNames(styles.button)} to={"/login"}>*/}
-        {/*  Log Out*/}
-        {/*</NavLink>*/}
+        <div className={styles.plus}>
+          <Plus />
+        </div>
       </div>
       <main className={styles.childrenSection}>{children}</main>
     </nav>

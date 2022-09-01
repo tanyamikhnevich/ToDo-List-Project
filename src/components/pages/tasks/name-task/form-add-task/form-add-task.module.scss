@@ -42,7 +42,7 @@
   flex-direction: row;
   justify-content: space-between;
   line-height: 140%;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .tagName {
@@ -75,7 +75,34 @@
   justify-content: flex-end;
   margin-top: 100px;
 }
+.buttonTagContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-height: 50px;
 
+}
+.buttonTag {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: white;
+  background: #2C5061;
+  border-radius: 20px;
+  padding: 2px 16px 2px 39px;
+  margin-right: 10px;
+  border: none;
+  position: relative;
+  margin-bottom: 5px;
+
+}
+.minus {
+  position: absolute;
+  top: 0;
+  left: 15px;
+
+}
 .buttonSave {
   background: #000000;
   border-radius: 8px;
@@ -95,4 +122,5 @@
   color: #565656;
   padding: 8px 16px;
   margin-right: 8px;
+  border: none;
 }

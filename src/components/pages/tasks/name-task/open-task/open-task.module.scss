@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #565656;
+  margin-bottom: 32px;
+}
+
+.buttonTagContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 109px;
+}
+
+.buttonTag {
+  background: #2C5061;
+  border-radius: 20px;
+  padding: 2px 16px;
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: #FFFFFF;
+  border: none;
+
+}
+
+.buttonEditContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.buttonEdit {
+  background: #000000;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: #FFFFFF;
+  margin-right: 8px;
+}

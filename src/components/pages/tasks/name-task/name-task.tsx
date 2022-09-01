@@ -1,22 +1,33 @@
-import { ReactComponent as Points } from "./../../../assets/images/three-points.svg";
-
-import { removeTodo, toggleTodoComplete } from "../../../store/toDoSlice";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import classNames from "classnames";
+
+import { toggleTodoComplete } from "../../../store/toDoSlice";
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { ButtonSelect } from "./button-select/button-select";
 
 import styles from "./name-task.module.scss";
-import { ButtonSelect } from "./button-select";
+import { AddTaskForm } from "./form-add-task/form-add-task";
+import { usePopup } from "../../../features/popup";
 
 export const NameTask: React.FC = () => {
   const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
+  const { openPopup } = usePopup();
+
+  // useEffect(() => {console.log(todos)}, [todos]);
 
   return (
     <div>
       {todos.map((todo) => (
         <Fragment key={todo.id}>
-          <div className={styles.container}>
+          <div
+            onDoubleClick={() =>
+              openPopup(
+                <AddTaskForm name={todo.name} description={todo.description} />
+              )
+            }
+            className={styles.container}
+          >
             <div className={styles.checkboxContainer}>
               <input
                 className={styles.checkbox}
@@ -33,17 +44,15 @@ export const NameTask: React.FC = () => {
                   todo.completed ? styles.nameDo : styles.name
                 )}
               >
-                {todo.text}
+                {todo.name}
               </h2>
-              <p className={styles.description}>
-                Description of task Хочу рассказать вам про свой переезд. Нашла
-                в интернете компанию в Эстонии, которая тысяч за 10–15
-                «оформляют» вид на жительство...
-              </p>
+              <p className={styles.description}>{todo.description}</p>
               <div className={styles.buttonContainer}>
-                <button className={styles.buttonTag}>tag</button>
-                <button className={styles.buttonTag}>tag</button>
-                <button className={styles.buttonTag}>tag</button>
+                {todo.tags.map((tag: string) => (
+                  <button key={tag} className={styles.buttonTag}>
+                    {tag}
+                  </button>
+                ))}
               </div>
             </div>
             <ButtonSelect todo={todo} />
