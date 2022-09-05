@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import { removeTodo, ToDoTaskI } from "../../../../store/toDoSlice";
+import {addTags, removeTodo, ToDoTaskI} from "components/store/toDoSlice";
 import { useAppDispatch } from "../hooks";
-import { ReactComponent as Points } from "../../../../assets/images/three-points.svg";
+import { ReactComponent as Points } from "components/assets/images/three-points.svg";
 import { AddTaskForm } from "../form-add-task/form-add-task";
-import { usePopup } from "../../../../features/popup";
+import { usePopup } from "components/features/popup";
 
 import styles from "./button-select.module.scss";
 
@@ -36,11 +36,13 @@ export const ButtonSelect = ({ todo }: PropsI) => {
             Delete Task
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               openPopup(
-                <AddTaskForm name={todo.name} description={todo.description} />
-              )
-            }
+                <AddTaskForm name={todo.name} description={todo.description} type='edit' id={todo.id}/>
+              );
+              dispatch(addTags(todo.tags));
+              setSelect((select) => !select);
+            }}
             className={styles.buttonEdit}
           >
             Edit Task

@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-.taskNameContainer {
+.nameContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +39,7 @@
   margin-bottom: 8px;
 }
 
-.nameDo {
+.completed {
   text-decoration: line-through;
   margin-bottom: 8px;
 }
@@ -55,19 +55,6 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
-}
-
-.buttonTag {
-  cursor: pointer;
-  background: #2C5061;
-  border-radius: 20px;
-  border: none;
-  margin-right: 10px;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 140%;
-  color: white;
-  padding: 2px 16px;
 }
 
 

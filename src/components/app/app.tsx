@@ -12,7 +12,7 @@ import {
 import "./styles/index.scss";
 import styles from "./app.module.scss";
 
-function App() {
+export const App = () => {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -29,4 +29,3 @@ function App() {
   );
 }
 
-export default App;

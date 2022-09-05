@@ -1,0 +1,24 @@
+.tag {
+  cursor: pointer;
+  background: #2C5061;
+  border-radius: 20px;
+  border: none;
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  color: white;
+  padding: 2px 16px;
+}
+
+.tagWithMinus {
+  position: relative;
+  padding: 2px 16px 2px 39px;
+
+}
+
+.minus {
+  position: absolute;
+  top: 0;
+  left: 15px;
+}

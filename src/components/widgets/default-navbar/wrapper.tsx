@@ -1,58 +1,69 @@
-import React, { ReactNode } from "react";
+import React, {ReactNode, useState} from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
-import { ReactComponent as Plus } from "./../../assets/images/plus.svg";
-import { usePopup } from "../../features/popup";
-import { AddTaskForm } from "../../pages/tasks/name-task/form-add-task/form-add-task";
+import { ReactComponent as Plus } from "components/assets/images/plus.svg";
+import { usePopup } from "components/features/popup";
+import { AddTaskForm } from "components/pages/tasks-page/tasks/form-add-task/form-add-task";
 
 import styles from "./wrapper-nav.module.scss";
-import { OpenTask } from "../../pages/tasks/name-task/open-task/open-task";
+import { OpenTask } from "../../pages/tasks-page/tasks/open-task/open-task";
+import { Modal } from "./../portal/portal";
+
+//TODO сделать кнопку по выбору формы
 
 interface Props {
   children: ReactNode;
+  className?: string;
 }
 
-// TODO вынести NavLink в объект и сделать map
-// TODO childrenSection => main
+const links = [
+  {
+    title: "Tasks",
+    url: "/tasks",
+  },
+  {
+    title: "Profile",
+    url: "/profile",
+  },
+];
 
-export const Wrapper = ({ children }: Props) => {
+export const Wrapper = ({ children, className }: Props) => {
   const getQuery = useLocation();
   const { openPopup } = usePopup();
+  const [open, setOpen] = useState(false)
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.buttonContainer}>
-        <NavLink
-          className={classNames(
-            styles.button,
-            getQuery.pathname === "/tasks" && styles.buttonActive
-          )}
-          to={"/tasks"}
-        >
-          Tasks
-        </NavLink>
-        <NavLink
-          className={classNames(
-            styles.button,
-            getQuery.pathname === "/profile" && styles.buttonActive
-          )}
-          to={"/profile"}
-        >
-          Profile
-        </NavLink>
+      <div className={styles.container}>
+        {links.map((link, index) => (
+          <NavLink
+            key={index}
+            className={classNames(
+              styles.button,
+              getQuery.pathname === `${link.url}` && styles.buttonActive
+            )}
+            to={link.url}
+          >
+            {link.title}
+          </NavLink>
+        ))}
         <button
-          className={classNames(styles.button, styles.buttonAdd)}
-          onClick={() => openPopup(<AddTaskForm name="" description={""} />)}
+          className={classNames(styles.button, styles.add)}
+          // onClick={() =>
+          //   openPopup(<AddTaskForm name="" description="" type="create" />)
+          // }
           //onClick={() => openPopup(<OpenTask />)}
+          onClick={() => setOpen(true)}
         >
+          <Modal open={open} onClose={() => setOpen(false)}><AddTaskForm name="" description="" type="create" /></Modal>
           Add Task
           <div className={styles.plus}>
             <Plus />
           </div>
         </button>
       </div>
-      <main className={styles.childrenSection}>{children}</main>
+      <main className={className}>{children}</main>
     </nav>
   );
 };

@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { array } from "yup";
+
 export interface ToDoTaskI {
   id: string;
   name: string;
@@ -11,6 +13,7 @@ interface AddToDoI {
   name: string;
   description: string;
   tags: string[];
+  id?: string;
 }
 
 interface AddTagI {
@@ -45,7 +48,14 @@ const toDoSlice = createSlice({
         tags: state.interimTodo.tags,
         completed: false,
       });
-      state.interimTodo.tags = [];
+    },
+    changeTodo(state, action: PayloadAction<AddToDoI>) {
+      const todo = state.todos.find((todo) => todo.id === action.payload.id);
+      if (!todo) return
+      todo.name = action.payload.name;
+      todo.description = action.payload.description;
+      todo.tags = action.payload.tags;
+      state.todos = [...state.todos.filter((todo) => todo.id !== action.payload.id), todo]
     },
     removeTodo(state, action: PayloadAction<string>) {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
@@ -61,13 +71,29 @@ const toDoSlice = createSlice({
     addTag(state, action: PayloadAction<AddTagI>) {
       state.interimTodo.tags.push(action.payload.tag);
     },
+    addTags(state, action: PayloadAction<Array<string>>) {
+      state.interimTodo.tags = action.payload;
+    },
+    clearInterimTag(state) {
+      state.interimTodo.tags = [];
+    },
     removeTag(state, action: PayloadAction<string>) {
-      state.interimTodo.tags = state.interimTodo.tags.filter((tag) => tag !== action.payload);
+      state.interimTodo.tags = state.interimTodo.tags.filter(
+        (tag) => tag !== action.payload
+      );
     },
   },
 });
 
-export const { addTodo, removeTodo, toggleTodoComplete, addTag, removeTag } =
-  toDoSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  toggleTodoComplete,
+  addTag,
+  removeTag,
+  addTags,
+  clearInterimTag,
+  changeTodo,
+} = toDoSlice.actions;
 
 export default toDoSlice.reducer;

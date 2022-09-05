@@ -1,11 +1,11 @@
 .nav {
-  background: #E5E5E5;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  z-index: 1;
 }
 
-.buttonContainer {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -35,11 +35,11 @@
   color: white;
 }
 
-.buttonAdd {
+.add {
   color: #71868E;
 }
 
-.childrenSection {
+.main {
   width: 70%;
 }
 

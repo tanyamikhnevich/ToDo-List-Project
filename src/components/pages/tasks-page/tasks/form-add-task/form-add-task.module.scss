@@ -37,43 +37,6 @@
   box-sizing: border-box;
 }
 
-.tagContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  line-height: 140%;
-  margin-bottom: 12px;
-}
-
-.tagName {
-  background: #FFFFFF;
-  border: 1px solid #9BACB5;
-  border-radius: 6px;
-  padding: 12px 16px 10px 16px;
-  margin-right: 4px;
-
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 130%;
-  color: #565656;
-  width: 75%;
-}
-
-.buttonAdd {
-  background: #000000;
-  border-radius: 8px;
-  color: white;
-  width: 20%;
-  padding: 11px 34px;
-  font-weight: 400;
-  font-size: 15px;
-}
-
-//.buttonAdd:disabled {
-//  background: #565656;
-//  cursor: default;
-//}
-
 .saveContainer{
   display: flex;
   flex-direction: row;
@@ -88,26 +51,7 @@
   max-height: 50px;
 
 }
-.buttonTag {
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 140%;
-  color: white;
-  background: #2C5061;
-  border-radius: 20px;
-  padding: 2px 16px 2px 39px;
-  margin-right: 10px;
-  border: none;
-  position: relative;
-  margin-bottom: 5px;
 
-}
-.minus {
-  position: absolute;
-  top: 0;
-  left: 15px;
-
-}
 .buttonSave {
   background: #000000;
   border-radius: 8px;

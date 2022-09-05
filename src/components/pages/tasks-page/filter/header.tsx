@@ -1,6 +1,6 @@
 import styles from "./filter.module.scss"
 
-export const Filter = () => {
+export const Header = () => {
     return (
         <div className={styles.section}>
             <input placeholder={'Serach'} className={styles.input}/>

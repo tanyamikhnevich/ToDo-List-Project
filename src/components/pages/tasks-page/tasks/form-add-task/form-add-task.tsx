@@ -1,27 +1,29 @@
 import * as React from "react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useState } from "react";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   addTodo,
-  addTag as addTagSlice,
-  removeTag,
-} from "../../../../store/toDoSlice";
+  changeTodo,
+  clearInterimTag,
+} from "components/store/toDoSlice";
 import { usePopup } from "components/features/popup";
-import { ReactComponent as Minus } from "./../../../../assets/images/minus.svg";
+import { FormAddTag } from "../form-add-tag/form-add-tag";
 
 import styles from "./form-add-task.module.scss";
 
-// TODO исправить везде импорты
 
 interface Values {
   name: string;
   description: string;
 }
 
-// TODO add disabled state for addButton
+type Props = Values & {
+  type: "edit" | "create";
+  id?: string;
+};
 
 const DisplayingErrorMessages = Yup.object().shape({
   name: Yup.string()
@@ -31,7 +33,7 @@ const DisplayingErrorMessages = Yup.object().shape({
   description: Yup.string().max(50, "Too Long!"),
 });
 
-export const AddTaskForm = ({ name, description }: Values) => {
+export const AddTaskForm = ({ name, description, type, id }: Props) => {
   const { closePopup } = usePopup();
   const [tagName, setTagName] = useState("");
 
@@ -49,23 +51,39 @@ export const AddTaskForm = ({ name, description }: Values) => {
         tags,
       })
     );
+    dispatch(clearInterimTag());
     setSubmitting(false);
     closePopup();
   };
 
-  const addTag = () => {
-    dispatch(addTagSlice({ tag: tagName }));
-    setTagName("");
+  const changeTask = (
+    values: Values,
+    { setSubmitting }: FormikHelpers<Values>
+  ) => {
+    dispatch(
+      changeTodo({
+        id,
+        name: values.name,
+        description: values.description,
+        tags,
+      })
+    );
+    dispatch(clearInterimTag());
+    setSubmitting(false);
+    closePopup();
   };
+
+  const initialValues = {
+    name: name || "",
+    description: description || "",
+  };
+
 
   return (
     <div className={styles.container}>
       <Formik
-        initialValues={{
-          name: name || "",
-          description: description || "",
-        }}
-        onSubmit={addTask}
+        initialValues={initialValues}
+        onSubmit={type === "create" ? addTask : changeTask}
         validationSchema={DisplayingErrorMessages}
       >
         {({ errors, touched }) => (
@@ -87,41 +105,21 @@ export const AddTaskForm = ({ name, description }: Values) => {
               {touched.description && errors.description && (
                 <div>{errors.description}</div>
               )}
-              <div className={styles.tagContainer}>
-                <input
-                  className={styles.tagName}
-                  placeholder="Name of tag"
-                  onChange={(e) => {
-                    setTagName(e.currentTarget.value);
-                  }}
-                  value={tagName}
-                />
-                <button
-                  className={styles.buttonAdd}
-                  onClick={addTag}
-                  type="button"
-                >
-                  Add
-                </button>
-              </div>
-              <div className={styles.buttonTagContainer}>
-                {tags.map((tag: string) => (
-                  <button
-                    onClick={() => dispatch(removeTag(tag))}
-                    key={tag}
-                    className={styles.buttonTag}
-                    type="button"
-                  >
-                    <span className={styles.minus}>
-                      <Minus />
-                    </span>
-                    {tag}
-                  </button>
-                ))}
-              </div>
+              <FormAddTag
+                setTagName={setTagName}
+                tagName={tagName}
+                tags={tags}
+              />
             </div>
             <div className={styles.saveContainer}>
-              <button className={styles.buttonCancel} type="button">
+              <button
+                className={styles.buttonCancel}
+                onClick={() => {
+                  closePopup();
+                  dispatch(clearInterimTag());
+                }}
+                type="button"
+              >
                 Cancel
               </button>
               <button className={styles.buttonSave} type="submit">
