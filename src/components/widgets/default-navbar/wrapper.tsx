@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
@@ -30,8 +30,13 @@ const links = [
 
 export const Wrapper = ({ children, className }: Props) => {
   const getQuery = useLocation();
-  const { openPopup } = usePopup();
-  const [open, setOpen] = useState(false)
+  // const { openPopup } = usePopup();
+  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    console.log("open", open);
+  }, [open]);
 
   return (
     <nav className={styles.nav}>
@@ -48,6 +53,15 @@ export const Wrapper = ({ children, className }: Props) => {
             {link.title}
           </NavLink>
         ))}
+        <Modal
+          open={open}
+          onClose={() => {
+            console.log(open, setOpen);
+            setOpen(false);
+          }}
+        >
+          <AddTaskForm name="" description="" type="create" />
+        </Modal>
         <button
           className={classNames(styles.button, styles.add)}
           // onClick={() =>
@@ -56,7 +70,6 @@ export const Wrapper = ({ children, className }: Props) => {
           //onClick={() => openPopup(<OpenTask />)}
           onClick={() => setOpen(true)}
         >
-          <Modal open={open} onClose={() => setOpen(false)}><AddTaskForm name="" description="" type="create" /></Modal>
           Add Task
           <div className={styles.plus}>
             <Plus />

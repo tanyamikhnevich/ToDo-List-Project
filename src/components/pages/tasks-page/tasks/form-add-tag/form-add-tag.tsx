@@ -1,9 +1,9 @@
 import styles from "./form-add-tag.module.scss";
 import { Tag } from "components/shared/tag/tag";
-import {addTag as addTagSlice, removeTag} from "components/store/toDoSlice";
+import { addTag as addTagSlice, removeTag } from "components/store/toDoSlice";
 import * as React from "react";
 import { useAppDispatch } from "../hooks";
-import {Dispatch, useEffect, useRef} from "react";
+import { Dispatch, useEffect, useRef } from "react";
 
 interface Props {
   setTagName: Dispatch<string>;
@@ -20,37 +20,45 @@ export const FormAddTag = ({ setTagName, tagName, tags }: Props) => {
 
   //useRef + addEventListener
 
+  const searchInput = useRef<HTMLInputElement>(null);
+  const searchButton = useRef<HTMLButtonElement>(null);
 
-  // const searchInput = useRef(null)
-  // const enterFunction = (event) => {
-  //   if (event.code === "Enter" || event.code === "NumpadEnter") {
-  //     event.preventDefault();}
-
-    // useEffect(() => {
-    //   if (!searchInput || !searchButton) return;
-    //   searchInput.current.addEventListener("keydown",enterFunction(event));
-    // }, []);
-
+  function meow(event: any) {
+    if (
+      (event.code === "Enter" || event.code === "NumpadEnter") &&
+      searchButton.current
+    ) {
+      event.preventDefault();
+      searchButton.current.click();
+    }
+  }
 
   useEffect(() => {
-    const searchInput = document.getElementById("inputYo");
-    const searchButton = document.getElementById("buttonTag");
-    if (!searchInput || !searchButton) return;
-    searchInput.addEventListener("keydown", function (event) {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        searchButton.click();
-      }
-    });
+    if (!searchInput.current || !searchButton.current) return;
+    searchInput.current.addEventListener("keydown", meow);
+    return () => {
+      searchInput.current!.removeEventListener("keydown", meow);
+    };
   }, []);
 
+  // useEffect(() => {
+  //   const searchInput = document.getElementById("inputYo");
+  //   const searchButton = document.getElementById("buttonTag");
+  //   if (!searchInput || !searchButton) return;
+  //   searchInput.addEventListener("keydown", function (event) {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //       event.preventDefault();
+  //       searchButton.click();
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.tags}>
         <input
-          id={"inputYo"}
-          // ref={searchInput}
+          // id={"inputYo"}
+          ref={searchInput}
           className={styles.tag}
           placeholder="Name of tag"
           onChange={(e) => {
@@ -59,8 +67,8 @@ export const FormAddTag = ({ setTagName, tagName, tags }: Props) => {
           value={tagName}
         />
         <button
-          id={"buttonTag"}
-          // ref={"buttonTag"}
+          // id={"buttonTag"}
+          ref={searchButton}
           className={styles.add}
           onClick={addTag}
           type="button"

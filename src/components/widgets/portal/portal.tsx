@@ -1,4 +1,10 @@
-import React, {Dispatch, ReactNode, ReactPortal, useEffect, useMemo} from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useMemo,
+} from "react";
 import { createPortal } from "react-dom";
 import styles from "./portal.module.scss";
 import { ReactComponent as CloseButton } from "../../assets/images/crossButton.svg";
@@ -9,8 +15,8 @@ const modalRootElement = document.querySelector("#modal");
 type Props = {
   children: ReactNode;
   open: boolean;
-  onClose: () => void
-}
+  onClose: () => void;
+};
 
 export const Modal = ({ children, open, onClose }: Props) => {
   const element = useMemo(() => document.createElement("div"), []);
@@ -21,11 +27,15 @@ export const Modal = ({ children, open, onClose }: Props) => {
     return () => {
       modalRootElement.removeChild(element);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    console.log(open)
+  }, [open])
 
   if (open) {
     return createPortal(
-      <div className={styles.modalBackground} >
+      <div className={styles.modalBackground}>
         <div className={styles.modalCard}>{children}</div>
         <button className={styles.close} onClick={onClose}>
           <CloseButton />
