@@ -3,13 +3,12 @@ import React, {
   ReactNode,
   ReactPortal,
   useEffect,
-  useMemo,
+  useMemo, useState,
 } from "react";
 import { createPortal } from "react-dom";
 import styles from "./portal.module.scss";
 import { ReactComponent as CloseButton } from "../../assets/images/crossButton.svg";
 
-//portal максимум час
 const modalRootElement = document.querySelector("#modal");
 
 type Props = {
@@ -19,19 +18,15 @@ type Props = {
 };
 
 export const Modal = ({ children, open, onClose }: Props) => {
-  const element = useMemo(() => document.createElement("div"), []);
+  const [element] = useState(() => document.createElement("div"));
 
   useEffect(() => {
-    if (!modalRootElement) return;
-    modalRootElement.appendChild(element);
-    return () => {
-      modalRootElement.removeChild(element);
-    };
+      if (!modalRootElement) return;
+      modalRootElement.appendChild(element);
+      return () => {
+        modalRootElement.removeChild(element);
+      };
   }, []);
-
-  useEffect(() => {
-    console.log(open)
-  }, [open])
 
   if (open) {
     return createPortal(

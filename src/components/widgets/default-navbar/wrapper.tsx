@@ -10,8 +10,6 @@ import styles from "./wrapper-nav.module.scss";
 import { OpenTask } from "../../pages/tasks-page/tasks/open-task/open-task";
 import { Modal } from "./../portal/portal";
 
-//TODO сделать кнопку по выбору формы
-
 interface Props {
   children: ReactNode;
   className?: string;
@@ -30,13 +28,8 @@ const links = [
 
 export const Wrapper = ({ children, className }: Props) => {
   const getQuery = useLocation();
-  // const { openPopup } = usePopup();
-  // const [open, setOpen] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    console.log("open", open);
-  }, [open]);
+  const { openPopup } = usePopup();
+ const [open, setOpen] = useState(false);
 
   return (
     <nav className={styles.nav}>
@@ -53,28 +46,30 @@ export const Wrapper = ({ children, className }: Props) => {
             {link.title}
           </NavLink>
         ))}
-        <Modal
-          open={open}
-          onClose={() => {
-            console.log(open, setOpen);
-            setOpen(false);
-          }}
-        >
-          <AddTaskForm name="" description="" type="create" />
-        </Modal>
+
         <button
           className={classNames(styles.button, styles.add)}
-          // onClick={() =>
-          //   openPopup(<AddTaskForm name="" description="" type="create" />)
-          // }
-          //onClick={() => openPopup(<OpenTask />)}
-          onClick={() => setOpen(true)}
+          onClick={() =>
+            openPopup(<AddTaskForm name="" description="" type="create" />)
+          }
+          // onClick={() => setOpen(true)}
         >
           Add Task
           <div className={styles.plus}>
             <Plus />
           </div>
         </button>
+
+        {/*<Modal*/}
+        {/*    open={open}*/}
+        {/*    onClose={() => {*/}
+        {/*      setOpen(false);*/}
+        {/*    }}*/}
+        {/*>*/}
+        {/*  <AddTaskForm name="" description="" type="create" />*/}
+        {/*</Modal>*/}
+
+
       </div>
       <main className={className}>{children}</main>
     </nav>
