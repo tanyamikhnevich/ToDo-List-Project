@@ -55,6 +55,9 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  max-height: 100px;
+  overflow-y: scroll;
 }
 
 

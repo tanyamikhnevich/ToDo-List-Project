@@ -80,7 +80,7 @@ export const AddTaskForm = ({ name, description, type, id }: Props) => {
 
 
   return (
-    <div className={styles.container}>
+    <div className={styles.background}>
       <Formik
         initialValues={initialValues}
         onSubmit={type === "create" ? addTask : changeTask}
@@ -88,7 +88,7 @@ export const AddTaskForm = ({ name, description, type, id }: Props) => {
       >
         {({ errors, touched }) => (
           <Form className={styles.form}>
-            <div>
+            <div className = {styles.container}>
               <Field
                 className={styles.taskName}
                 id="name"

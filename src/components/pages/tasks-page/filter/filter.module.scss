@@ -11,10 +11,12 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: #A6A6A6;
   background: #FFFFFF;
   border-radius: 8px;
   width: 60%;
+}
+.input::placeholder {
+  color: #A6A6A6;
 }
 
 .buttonFilter {

@@ -11,6 +11,11 @@
   margin-bottom: 12px;
 }
 
+.tagContainer {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 .tag {
   background: #FFFFFF;
   border: 1px solid #9BACB5;

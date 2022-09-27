@@ -1,4 +1,4 @@
-.container {
+.background {
  background: white;
 }
 
@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.container {
+  height: 320px;
+  max-height: 320px;
 }
 
 .taskName {
@@ -41,8 +46,8 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: 100px;
 }
+
 .buttonTagContainer {
   display: flex;
   flex-direction: row;

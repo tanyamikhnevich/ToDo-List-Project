@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
@@ -7,8 +7,6 @@ import { usePopup } from "components/features/popup";
 import { AddTaskForm } from "components/pages/tasks-page/tasks/form-add-task/form-add-task";
 
 import styles from "./wrapper-nav.module.scss";
-import { OpenTask } from "../../pages/tasks-page/tasks/open-task/open-task";
-import { Modal } from "./../portal/portal";
 
 interface Props {
   children: ReactNode;
@@ -29,7 +27,6 @@ const links = [
 export const Wrapper = ({ children, className }: Props) => {
   const getQuery = useLocation();
   const { openPopup } = usePopup();
- const [open, setOpen] = useState(false);
 
   return (
     <nav className={styles.nav}>
@@ -46,30 +43,17 @@ export const Wrapper = ({ children, className }: Props) => {
             {link.title}
           </NavLink>
         ))}
-
         <button
           className={classNames(styles.button, styles.add)}
           onClick={() =>
             openPopup(<AddTaskForm name="" description="" type="create" />)
           }
-          // onClick={() => setOpen(true)}
         >
           Add Task
           <div className={styles.plus}>
             <Plus />
           </div>
         </button>
-
-        {/*<Modal*/}
-        {/*    open={open}*/}
-        {/*    onClose={() => {*/}
-        {/*      setOpen(false);*/}
-        {/*    }}*/}
-        {/*>*/}
-        {/*  <AddTaskForm name="" description="" type="create" />*/}
-        {/*</Modal>*/}
-
-
       </div>
       <main className={className}>{children}</main>
     </nav>

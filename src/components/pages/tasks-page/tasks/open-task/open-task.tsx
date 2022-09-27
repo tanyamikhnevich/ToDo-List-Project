@@ -17,15 +17,14 @@ export const OpenTask = ({ todo }: Props) => {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.dataContainer}>
         <h2 className={styles.name}>{todo.name}</h2>
         <p className={styles.description}>{todo.description}</p>
-      </div>
-
-      <div className={styles.buttonTagContainer}>
-        {todo.tags.map((tag) => (
-          <Tag key={tag} name={tag} />
-        ))}
+        <div className={styles.buttonTagContainer}>
+          {todo.tags.map((tag) => (
+            <Tag key={tag} name={tag} />
+          ))}
+        </div>
       </div>
 
       <div className={styles.buttonEditContainer}>
@@ -33,7 +32,12 @@ export const OpenTask = ({ todo }: Props) => {
           className={styles.buttonEdit}
           onClick={() => {
             openPopup(
-              <AddTaskForm name={todo.name} description={todo.description} type='edit' id={todo.id}/>
+              <AddTaskForm
+                name={todo.name}
+                description={todo.description}
+                type="edit"
+                id={todo.id}
+              />
             );
             dispatch(addTags(todo.tags));
           }}

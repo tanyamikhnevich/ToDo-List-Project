@@ -1,14 +1,17 @@
 import React from "react";
-import { useAppSelector } from "./hooks";
 import { Task } from "./task/task";
 
 import styles from "./tasks.module.scss";
+import {ToDoTaskI} from "../../../store/toDoSlice";
 
-export const Tasks = () => {
-  const todos = useAppSelector((state) => state.todos.todos);
+interface Props {
+  filteredTodos: ToDoTaskI[];
+}
+
+export const Tasks = ({filteredTodos}:Props) => {
   return (
     <div className={styles.container}>
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <Task key={todo.id} todo={todo} />
       ))}
     </div>
